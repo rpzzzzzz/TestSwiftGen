@@ -14,6 +14,7 @@
 		424F49DE1D3405530089D75A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 424F49DC1D3405530089D75A /* LaunchScreen.storyboard */; };
 		424F49E91D3405530089D75A /* TestSwiftGenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F49E81D3405530089D75A /* TestSwiftGenTests.swift */; };
 		424F49F41D3405530089D75A /* TestSwiftGenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F49F31D3405530089D75A /* TestSwiftGenUITests.swift */; };
+		424F4A071D3407EF0089D75A /* StoryboardAutoGen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424F4A061D3407EF0089D75A /* StoryboardAutoGen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		424F49EF1D3405530089D75A /* TestSwiftGenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestSwiftGenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		424F49F31D3405530089D75A /* TestSwiftGenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSwiftGenUITests.swift; sourceTree = "<group>"; };
 		424F49F51D3405530089D75A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		424F4A061D3407EF0089D75A /* StoryboardAutoGen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardAutoGen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		424F49D21D3405530089D75A /* TestSwiftGen */ = {
 			isa = PBXGroup;
 			children = (
+				424F4A051D3407EF0089D75A /* Constants */,
 				424F49D31D3405530089D75A /* AppDelegate.swift */,
 				424F49D51D3405530089D75A /* ViewController.swift */,
 				424F49D71D3405530089D75A /* Main.storyboard */,
@@ -125,6 +128,14 @@
 			path = TestSwiftGenUITests;
 			sourceTree = "<group>";
 		};
+		424F4A051D3407EF0089D75A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				424F4A061D3407EF0089D75A /* StoryboardAutoGen.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,6 +143,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 424F49F81D3405530089D75A /* Build configuration list for PBXNativeTarget "TestSwiftGen" */;
 			buildPhases = (
+				424F4A011D34055A0089D75A /* SwiftGen */,
 				424F49CC1D3405530089D75A /* Sources */,
 				424F49CD1D3405530089D75A /* Frameworks */,
 				424F49CE1D3405530089D75A /* Resources */,
@@ -251,6 +263,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		424F4A011D34055A0089D75A /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "swiftgen storyboards ${SRCROOT}/${PRODUCT_NAME}/Base.lproj/Main.storyboard > ${SRCROOT}/${PRODUCT_NAME}/Constants/StoryboardAutoGen.swift\nif [[ $? != 0 ]] ; then\ncat << EOM\nerror: Failed to run the swiftgen command. If you do not have swiftgen installed, you can install it via homebrew:\n\n$ brew update\n$ brew install swiftgen\n\nFor more information, visit 'https://github.com/AliSoftware/SwiftGen'.\nEOM\nexit 1\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		424F49CC1D3405530089D75A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -258,6 +287,7 @@
 			files = (
 				424F49D61D3405530089D75A /* ViewController.swift in Sources */,
 				424F49D41D3405530089D75A /* AppDelegate.swift in Sources */,
+				424F4A071D3407EF0089D75A /* StoryboardAutoGen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

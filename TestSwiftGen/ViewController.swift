@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    navigationController?.pushViewController(StoryboardScene.Main.TestAutoGenScene.viewController(), animated: true)
   }
 
   override func didReceiveMemoryWarning() {
